@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form Validation</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+ 
+<h2>Login Form</h2>
+ 
+<form id="loginForm" onsubmit="return validateForm()">
+    <label>Email:</label><br>
+    <input type="text" id="email"><br><br>
+ 
+    <label>Password:</label><br>
+    <input type="password" id="password"><br><br>
+ 
+    <button type="submit">Login</button>
+</form>
+ 
+<p id="message"></p>
+<p>Wrong Submission Count: <span id="count">0</span></p>
+ 
+<script>
+    let wrongCount = 0;
+ 
+    function validateForm() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let message = document.getElementById("message");
+ 
+       
+        if (!email.includes("@")) {
+            wrongCount++;
+            document.getElementById("count").innerHTML = wrongCount;
+            message.innerHTML = "Email must contain '@'.";
+            message.className = "error";
+            return false;
+        }
+ 
+       
+        if (password.length < 6) {
+            wrongCount++;
+            document.getElementById("count").innerHTML = wrongCount;
+            message.innerHTML = "Password must be at least 6 characters long.";
+            message.className = "error";
+            return false;
+        }
+ 
+       
+        if (!password.includes("#")) {
+            wrongCount++;
+            document.getElementById("count").innerHTML = wrongCount;
+            message.innerHTML = "Password must contain '#'.";
+            message.className = "error";
+            return false;
+        }
+ 
+        message.innerHTML = "Login Successful!";
+        message.className = "success";
+        return false;
+    }
+</script>
+ 
+</body>
+</html>
+ 
